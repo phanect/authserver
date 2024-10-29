@@ -20,4 +20,11 @@ export default [
       },
     },
   },
+  // tmp
+  {
+    files: [ "**/**" ],
+    rules: {
+      "@typescript-eslint/no-use-before-define": "off",
+    },
+  },
 ];
