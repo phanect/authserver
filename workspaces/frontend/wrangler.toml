@@ -5,3 +5,8 @@ type = "javascript"
 account_id = "6c6da1080173b4e8512770e8f9309068"
 zone_id = "247a635bf5a6091a2667ed8c2fa082ec"
 workers_dev = true
+
+[[d1_databases]]
+binding = "d1"
+database_name = "astro-login"
+database_id = "abcdefgh-abcdefgh-abcdefgh-abcdefgh-abcdefgh"
