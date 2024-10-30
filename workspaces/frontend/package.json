@@ -1,0 +1,26 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "lint": "astro check"
+  },
+  "dependencies": {
+    "@phanect/configs": "latest",
+    "@types/node": "^22.0.0",
+    "astro": "^4.16.7",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4"
+  },
+  "engines": {
+    "node": "20.x || >=22.x",
+    "npm": ">=9.x",
+    "pnpm": ">=9.x"
+  }
+}

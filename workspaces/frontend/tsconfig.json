@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "astro/tsconfigs/strict",
+    "@phanect/configs/ts/frontend"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.mjs",
+    "**/*.jsx"
+  ],
+  "exclude": [
+    "node_modules/",
+    ".astro/",
+    "dist/"
+  ]
+}
