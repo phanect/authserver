@@ -1,5 +1,5 @@
 import type { Env } from "hono";
-import type { User, Session } from "lucia";
+import type { User, Session } from "./index.ts";
 
 export type Context = {
   Variables: {
