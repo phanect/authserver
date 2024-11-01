@@ -9,7 +9,7 @@
   "module": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "shx rm -rf ./dist/* && tsc",
+    "build": "tsup",
     "test": "vitest run",
     "test.debug": "vitest run src/utils/debug.test.ts"
   },
@@ -17,6 +17,7 @@
     "@phanect/configs": "latest",
     "@types/node": "^22.8.6",
     "prettier": "^2.3.0",
+    "tsup": "^8.3.5",
     "vitest": "^2.0.0"
   },
   "dependencies": {
