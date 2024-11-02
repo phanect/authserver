@@ -16,16 +16,11 @@
   },
   "devDependencies": {
     "@phanect/configs": "latest",
-    "@types/mocha": "^10.0.1",
     "lucia": "workspace:*",
     "tsup": "^8.3.5"
   },
   "peerDependencies": {
     "lucia": "workspace:*"
-  },
-  "dependencies": {
-    "mocha": "^10.2.0",
-    "oslo": "0.28.2"
   },
   "engines": {
     "node": ">=22.x",
