@@ -19,9 +19,6 @@
     "lucia": "workspace:*",
     "tsup": "^8.3.5"
   },
-  "peerDependencies": {
-    "lucia": "workspace:*"
-  },
   "engines": {
     "node": ">=22.x",
     "npm": ">=9.x",
