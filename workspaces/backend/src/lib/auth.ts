@@ -30,7 +30,6 @@ export const github = new GitHub(
 );
 
 export type Register = {
-  Lucia: typeof lucia;
   DatabaseUserAttributes: {
     username: string;
     githubId: number;

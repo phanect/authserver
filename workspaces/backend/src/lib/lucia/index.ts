@@ -11,7 +11,6 @@ export type {
 export type { DatabaseSession, DatabaseUser, Adapter } from "./database.ts";
 export type { PasswordHashingAlgorithm } from "./crypto.ts";
 
-import type { Lucia } from "./core.ts";
 import type { Register } from "../auth.ts";
 
 export type UserId = Register extends {
@@ -19,14 +18,6 @@ export type UserId = Register extends {
 }
   ? _UserId
   : string;
-
-export type RegisteredLucia = Register extends {
-  Lucia: infer _Lucia;
-}
-  ? _Lucia extends Lucia<object, object>
-    ? _Lucia
-    : Lucia
-  : Lucia;
 
 export type RegisteredDatabaseUserAttributes = Register extends {
   DatabaseUserAttributes: infer _DatabaseUserAttributes;
