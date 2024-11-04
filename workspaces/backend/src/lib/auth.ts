@@ -24,10 +24,3 @@ export const getLuciaInstance = (context: Context<Env>): Lucia => new Lucia(
     }),
   }
 );
-
-export type Register = {
-  DatabaseUserAttributes: {
-    username: string;
-    githubId: number;
-  };
-};

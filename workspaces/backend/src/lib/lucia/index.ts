@@ -10,23 +10,3 @@ export type {
 } from "./core.ts";
 export type { DatabaseSession, DatabaseUser, Adapter } from "./database.ts";
 export type { PasswordHashingAlgorithm } from "./crypto.ts";
-
-import type { Register } from "../auth.ts";
-
-export type UserId = Register extends {
-  UserId: infer _UserId;
-}
-  ? _UserId
-  : string;
-
-export type RegisteredDatabaseUserAttributes = Register extends {
-  DatabaseUserAttributes: infer _DatabaseUserAttributes;
-}
-  ? _DatabaseUserAttributes
-  : object;
-
-export type RegisteredDatabaseSessionAttributes = Register extends {
-  DatabaseSessionAttributes: infer _DatabaseSessionAttributes;
-}
-  ? _DatabaseSessionAttributes
-  : object;
