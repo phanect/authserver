@@ -1,3 +1,6 @@
 name = "example"
-main = "src/index.ts"
+main = "src/index.tsx"
 compatibility_date = "2024-11-13"
+
+[dev]
+port = 3000
