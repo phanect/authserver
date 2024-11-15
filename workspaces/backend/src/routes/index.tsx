@@ -1,6 +1,8 @@
 import { Hono } from "hono";
+import { env } from "hono/adapter";
 import { PrismaClient } from "@prisma/client";
-import { PrismaD1 } from "@prisma/adapter-d1";
+import { PrismaLibSQL } from "@prisma/adapter-libsql";
+import { createClient } from "@libsql/client";
 import { Lucia, verifyRequestOrigin } from "./internal/lucia/index.ts";
 import { PrismaAdapter } from "./internal/lucia/prisma-adapter.ts";
 import { githubRouter } from "./github.ts";
@@ -19,9 +21,19 @@ export const authRoutes = new Hono<Env>()
     }
     return next();
   }).use("*", async (c, next) => {
+    const { TURSO_DATABASE_URL, TURSO_AUTH_TOKEN } = env(c);
+
+    if (!TURSO_DATABASE_URL || !TURSO_AUTH_TOKEN) {
+      throw new Error("Database URL and/or its credential are not set.");
+    }
+
     const prisma = new PrismaClient({
-      adapter: new PrismaD1(c.env.db),
+      adapter: new PrismaLibSQL(createClient({
+        url: TURSO_DATABASE_URL,
+        authToken: TURSO_AUTH_TOKEN,
+      })),
     });
+
     const lucia = new Lucia(
       new PrismaAdapter(prisma.session, prisma.user),
       {

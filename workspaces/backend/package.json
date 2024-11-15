@@ -22,12 +22,25 @@
   "dependencies": {
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "@prisma/adapter-d1": "^5.22.0",
     "@prisma/client": "^5.21.1",
     "arctic": "^2.0.0"
   },
   "peerDependencies": {
+    "@libsql/client": "^0.14.0",
+    "@prisma/adapter-d1": "^5.22.0",
+    "@prisma/adapter-libsql": "^5.22.0",
     "hono": "^4.1.5"
+  },
+  "peerDependenciesMeta": {
+    "@libsql/client": {
+      "optional": true
+    },
+    "@prisma/adapter-d1": {
+      "optional": true
+    },
+    "@prisma/adapter-libsql": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241022.0",
