@@ -2,7 +2,7 @@ import { eq, lte } from "drizzle-orm";
 import { IcedGateUsers, type IcedGateUser } from "../db/schema/user.ts";
 import { IcedGateSessions, type IcedGateSession } from "../db/schema/session.ts";
 import type { PgDatabase } from "drizzle-orm/pg-core";
-import type { Adapter } from "lucia";
+import type { Adapter } from "./database.ts";
 
 export class DrizzlePostgreSQLAdapter implements Adapter {
   private db: PgDatabase<any, any, any>;
