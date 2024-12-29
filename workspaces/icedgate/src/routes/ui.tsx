@@ -1,5 +1,4 @@
 import { Hono } from "hono";
-import { lucia } from "../libs/auth.ts";
 
 import type { IcedGateEnv } from "../libs/types.ts";
 
@@ -23,6 +22,7 @@ export const ui = new Hono<IcedGateEnv>()
       </html>
     ), 200);
   }).post("/", async (c) => {
+    const lucia = c.get("lucia");
     const session = c.get("session");
     if (!session) {
       return c.body(null, 401);
