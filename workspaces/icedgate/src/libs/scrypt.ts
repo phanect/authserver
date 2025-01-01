@@ -70,7 +70,7 @@ export async function scrypt(
     }
     for (let i = 0, pos = 0; i < N - 1; i++) {
       BlockMix(V, pos, V, (pos += blockSize32), r); // V[i] = BlockMix(V[i-1]);
-      await new Promise<void>((r) => r()); // await next tick
+      await new Promise<void>((resolve) => resolve()); // await next tick
     }
     BlockMix(V, (N - 1) * blockSize32, B32, Pi, r); // Process last element
     for (let i = 0; i < N; i++) {
@@ -81,7 +81,7 @@ export async function scrypt(
       }
 
       BlockMix(tmp, 0, B32, Pi, r); // B = BlockMix(B ^ V[j])
-      await new Promise<void>((r) => r()); // await next tick
+      await new Promise<void>((resolve) => resolve()); // await next tick
     }
   }
   const res = await pbkdf2(password, B, { c: 1, dkLen });
@@ -103,22 +103,25 @@ function XorAndSalsa(
   out: Uint32Array,
   oi: number
 ): void {
-  const y00 = prev[pi++] ^ input[ii++];
-  const y01 = prev[pi++] ^ input[ii++];
-  const y02 = prev[pi++] ^ input[ii++];
-  const y03 = prev[pi++] ^ input[ii++];
-  const y04 = prev[pi++] ^ input[ii++];
-  const y05 = prev[pi++] ^ input[ii++];
-  const y06 = prev[pi++] ^ input[ii++];
-  const y07 = prev[pi++] ^ input[ii++];
-  const y08 = prev[pi++] ^ input[ii++];
-  const y09 = prev[pi++] ^ input[ii++];
-  const y10 = prev[pi++] ^ input[ii++];
-  const y11 = prev[pi++] ^ input[ii++];
-  const y12 = prev[pi++] ^ input[ii++];
-  const y13 = prev[pi++] ^ input[ii++];
-  const y14 = prev[pi++] ^ input[ii++];
-  const y15 = prev[pi++] ^ input[ii++];
+  let _pi = pi;
+  let _ii = ii;
+
+  const y00 = prev[_pi++] ^ input[_ii++];
+  const y01 = prev[_pi++] ^ input[_ii++];
+  const y02 = prev[_pi++] ^ input[_ii++];
+  const y03 = prev[_pi++] ^ input[_ii++];
+  const y04 = prev[_pi++] ^ input[_ii++];
+  const y05 = prev[_pi++] ^ input[_ii++];
+  const y06 = prev[_pi++] ^ input[_ii++];
+  const y07 = prev[_pi++] ^ input[_ii++];
+  const y08 = prev[_pi++] ^ input[_ii++];
+  const y09 = prev[_pi++] ^ input[_ii++];
+  const y10 = prev[_pi++] ^ input[_ii++];
+  const y11 = prev[_pi++] ^ input[_ii++];
+  const y12 = prev[_pi++] ^ input[_ii++];
+  const y13 = prev[_pi++] ^ input[_ii++];
+  const y14 = prev[_pi++] ^ input[_ii++];
+  const y15 = prev[_pi++] ^ input[_ii++];
   let x00 = y00;
   let x01 = y01;
   let x02 = y02;
