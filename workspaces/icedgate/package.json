@@ -19,6 +19,8 @@
     "test": "pnpm run build:db && tsx tests/mysql.ts && tsx tests/postgresql.ts && tsx tests/sqlite.ts && vitest run"
   },
   "dependencies": {
+    "@oslojs/crypto": "^1.0.1",
+    "@oslojs/encoding": "^1.1.0",
     "arctic": "^2.0.0",
     "better-sqlite3": "^9.2.2",
     "dotenv": "^16.3.1",
@@ -28,8 +30,6 @@
     "pg": "^8.8.0"
   },
   "devDependencies": {
-    "@oslojs/crypto": "^1.0.1",
-    "@oslojs/encoding": "^1.1.0",
     "@phanect/configs": "latest",
     "@types/better-sqlite3": "^7.6.8",
     "@types/node": "^22.8.6",
