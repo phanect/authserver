@@ -6,6 +6,6 @@ import { github } from "./github.ts";
 import type { IcedGateEnv } from "../libs/types.ts";
 
 export const icedgate = new Hono<IcedGateEnv>()
-  .route("*", middleware)
+  .use(middleware)
   .route("/", ui)
   .route("/", github);
