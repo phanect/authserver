@@ -2,11 +2,88 @@ import { GitHub, OAuth2RequestError, generateState } from "arctic";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { env } from "hono/adapter";
+import { googleAuth } from "@hono/oauth-providers/google";
 import { getCookie, setCookie } from "hono/cookie";
 import { IcedGateUsers } from "../db/schema/user.ts";
 import { generateId } from "../libs/crypto.ts";
 import { isLocal } from "../libs/utils.ts";
 import type { IcedGateEnv } from "../libs/types.ts";
+
+
+export const google = new Hono<IcedGateEnv>()
+  .use("/login/google", async (c, next) => {
+    const {
+      GOOGLE_CLIENT_ID,
+      GOOGLE_CLIENT_SECRET,
+    } = env(c);
+
+    const googleMiddleware = googleAuth({
+      client_id: GOOGLE_CLIENT_ID as string,
+      client_secret: GOOGLE_CLIENT_SECRET as string,
+      scope: [
+        "openid",
+        "email",
+        "profile",
+      ],
+    });
+
+    return googleMiddleware(c, next);
+  }).get("/login/google", (c) => {
+    // TODO
+
+
+
+
+
+
+    try {
+      const drizzle = c.get("drizzle");
+      const lucia = c.get("lucia");
+
+      const tokens = await github.validateAuthorizationCode(code);
+      const githubUserResponse = await fetch("https://api.github.com/user", {
+        headers: {
+          Authorization: `Bearer ${ tokens.accessToken() }`,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28",
+          "User-Agent": "IcedGate",
+        },
+      });
+      const githubUser: GitHubUser = await githubUserResponse.json();
+      const [ existingUser ] = await drizzle.select().from(IcedGateUsers)
+        .limit(1)
+        .where(eq(IcedGateUsers.githubId, githubUser.id));
+
+      if (existingUser) {
+        const session = await lucia.createSession(existingUser.id);
+        c.header("Set-Cookie", lucia.createSessionCookie(session.id).serialize(), { append: true });
+        return c.redirect("/");
+      }
+
+      const userId = generateId(15);
+      await drizzle.insert(IcedGateUsers).values({
+        id: userId,
+        githubId: githubUser.id,
+        username: githubUser.login,
+      });
+
+      const session = await lucia.createSession(userId);
+      c.header("Set-Cookie", lucia.createSessionCookie(session.id).serialize(), { append: true });
+      return c.redirect("/");
+    } catch (e) {
+      console.error(e);
+
+      if (e instanceof OAuth2RequestError && e.message.endsWith("bad_verification_code")) {
+        return c.text("Failed to authenticate with GitHub due to invalid verification code. Sorry, this is probably caused by a bug or incident of this service or GitHub.", 400);
+      }
+      return c.text("Failed to authenticate with GitHub due to unexpected error. Sorry, this is probably caused by a bug or incident of this service or GitHub.", 500);
+    }
+  });
+
+
+
+
+
 
 type GitHubUser = {
   id: number;
@@ -42,7 +119,7 @@ export const github = new Hono<IcedGateEnv>()
       secure: !isLocal(c),
       httpOnly: true,
       maxAge: 60 * 10,
-      sameSite: "Strict",
+      sameSite: "Lax",
     });
     return c.redirect(url.toString());
   }).get("/login/github/callback", async (c) => {

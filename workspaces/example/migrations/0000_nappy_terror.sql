@@ -9,8 +9,10 @@ CREATE TABLE `IcedGateSessions` (
 CREATE TABLE `IcedGateUsers` (
 	`id` text PRIMARY KEY NOT NULL,
 	`username` text NOT NULL,
+	`googleId` integer,
 	`githubId` integer
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `IcedGateUsers_username_unique` ON `IcedGateUsers` (`username`);--> statement-breakpoint
+CREATE UNIQUE INDEX `IcedGateUsers_googleId_unique` ON `IcedGateUsers` (`googleId`);--> statement-breakpoint
 CREATE UNIQUE INDEX `IcedGateUsers_githubId_unique` ON `IcedGateUsers` (`githubId`);

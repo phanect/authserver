@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "9923f59d-38ba-4694-8542-f2d6b3484ec6",
+  "id": "fee0cd84-30d6-4268-bf5f-3179a63151e7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "IcedGateSessions": {
@@ -73,6 +73,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "googleId": {
+          "name": "googleId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "githubId": {
           "name": "githubId",
           "type": "integer",
@@ -86,6 +93,13 @@
           "name": "IcedGateUsers_username_unique",
           "columns": [
             "username"
+          ],
+          "isUnique": true
+        },
+        "IcedGateUsers_googleId_unique": {
+          "name": "IcedGateUsers_googleId_unique",
+          "columns": [
+            "googleId"
           ],
           "isUnique": true
         },
