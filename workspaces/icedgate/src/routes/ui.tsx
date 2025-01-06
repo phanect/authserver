@@ -17,6 +17,7 @@ export const ui = new Hono<IcedGateEnv>()
         </head>
         <body>
           <h1>Login or Sign up</h1>
+          <a href="/login/google">Login or sign up with Google</a> <br />
           <a href="/login/github">Login or sign up with GitHub</a>
         </body>
       </html>
