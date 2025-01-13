@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "@phanect/configs/ts",
+    "@phanect/configs/ts/addons/npm"
+  ],
+  "compilerOptions": {
+    "types": [
+      "@cloudflare/workers-types"
+    ],
+    "jsxImportSource": "hono/jsx"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.mjs",
+    "**/*.jsx"
+  ],
+  "exclude": [
+    "node_modules/",
+    "dist/",
+
+    // tmporarily ignore
+    "./src/libs/adapter-mysql.ts",
+    "./src/libs/adapter-postgresql.ts",
+    "./tests/adapter-*"
+  ]
+}
