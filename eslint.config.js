@@ -6,6 +6,11 @@ export default [
     ignores: [
       "**/dist/**",
       "**/vendor/**",
+
+      // tmporarily ignore
+      "./workspaces/icedgate/src/libs/adapter-mysql.ts",
+      "./workspaces/icedgate/src/libs/adapter-postgresql.ts",
+      "./workspaces/icedgate/tests/adapter-*.ts",
     ],
   },
 
