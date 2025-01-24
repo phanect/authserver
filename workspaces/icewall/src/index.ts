@@ -35,4 +35,4 @@ export function getUser(
 };
 
 export const isAuthenticated = (c: Context<IcewallEnv, string, Input>): boolean => !!c.get("user");
-export type { IcewallEnv, IcewallUser };
+export type { IcewallEnv };
