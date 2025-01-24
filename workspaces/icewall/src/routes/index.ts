@@ -5,7 +5,7 @@ import { github } from "./github.ts";
 
 import type { IcewallEnv } from "../types.ts";
 
-export const authRoutes = new Hono<IcewallEnv>()
+export const icewallRoutes = new Hono<IcewallEnv>()
   .use("/*", middleware)
   .route("/auth", ui)
   .route("/auth", github);
