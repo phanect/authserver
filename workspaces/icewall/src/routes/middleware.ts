@@ -11,7 +11,12 @@ export type IcewallMiddlewareOptions = {
   userPropsTable: UserPropsTable;
 };
 
-/** Middleware for pages to be protected by the authwall */
+/**
+ * Middleware for pages to be protected by the authwall
+ * @param options - Options
+ * @param options.userPropsTable - User-defined UserProps table instance.
+ * @returns Icewall middleware
+ */
 export const icewallMiddleware = (options?: IcewallMiddlewareOptions) =>
   createMiddleware<IcewallEnv>(async (c, next) => {
     if (options?.userPropsTable) {
