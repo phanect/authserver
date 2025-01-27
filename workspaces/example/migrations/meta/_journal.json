@@ -8,6 +8,20 @@
       "when": 1736938728559,
       "tag": "0000_next_clea",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1738150471469,
+      "tag": "0001_regular_garia",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1738150479383,
+      "tag": "0002_grey_wasp",
+      "breakpoints": true
     }
   ]
 }
